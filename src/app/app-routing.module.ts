@@ -1,10 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: 'movies',
+    loadChildren: () =>
+      import('./pages/movies/movies.module').then((m) => m.MoviesModule),
+  },
+  {
+    path: 'favorites',
+    loadChildren: () =>
+      import('./pages/favorites/favorites.module').then(
+        (m) => m.FavoritesModule
+      ),
+  },
+  {
+    path: 'movie-details',
+    loadChildren: () =>
+      import('./pages/movie-details/movie-details.module').then(
+        (m) => m.MovieDetailsModule
+      ),
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
