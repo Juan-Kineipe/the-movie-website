@@ -10,49 +10,51 @@
       <span>Browse By:</span>
     </div> -->
   </section>
-  <section class="movie-list" *ngIf="popularMovies">
-    <h2 class="movie-list__title">Popular</h2>
-    <p-carousel
-      [value]="popularMovies"
-      [numVisible]="7"
-      [numScroll]="7"
-      [circular]="true"
-      [showIndicators]="false"
-      [responsiveOptions]="responsiveOptions"
-    >
-      <ng-template pTemplate="item" let-movie>
-        <app-movie-card [movie]="movie"></app-movie-card>
-      </ng-template>
-    </p-carousel>
-  </section>
-  <section class="movie-list" *ngIf="topRatedMovies">
-    <h2 class="movie-list__title">Top Rated</h2>
-    <p-carousel
-      [value]="topRatedMovies"
-      [numVisible]="7"
-      [numScroll]="7"
-      [circular]="true"
-      [showIndicators]="false"
-      [responsiveOptions]="responsiveOptions"
-    >
-      <ng-template pTemplate="item" let-movie>
-        <app-movie-card [movie]="movie"></app-movie-card>
-      </ng-template>
-    </p-carousel>
-  </section>
-  <section class="movie-list" *ngIf="upcomingMovies">
-    <h2 class="movie-list__title">Upcoming</h2>
-    <p-carousel
-      [value]="upcomingMovies"
-      [numVisible]="7"
-      [numScroll]="7"
-      [circular]="true"
-      [showIndicators]="false"
-      [responsiveOptions]="responsiveOptions"
-    >
-      <ng-template pTemplate="item" let-movie>
-        <app-movie-card [movie]="movie"></app-movie-card>
-      </ng-template>
-    </p-carousel>
+  <section class="movie-list-container" *ngIf="movies$ | async as movies">
+    <section class="movie-list" *ngIf="movies.popular.length">
+      <h2 class="movie-list__title">Popular</h2>
+      <p-carousel
+        [value]="movies.popular"
+        [numVisible]="7"
+        [numScroll]="7"
+        [circular]="true"
+        [showIndicators]="false"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template pTemplate="item" let-movie>
+          <app-movie-card [movie]="movie"></app-movie-card>
+        </ng-template>
+      </p-carousel>
+    </section>
+    <section class="movie-list" *ngIf="movies.topRated.length">
+      <h2 class="movie-list__title">Top Rated</h2>
+      <p-carousel
+        [value]="movies.topRated"
+        [numVisible]="7"
+        [numScroll]="7"
+        [circular]="true"
+        [showIndicators]="false"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template pTemplate="item" let-movie>
+          <app-movie-card [movie]="movie"></app-movie-card>
+        </ng-template>
+      </p-carousel>
+    </section>
+    <section class="movie-list" *ngIf="movies.upcoming.length">
+      <h2 class="movie-list__title">Upcoming</h2>
+      <p-carousel
+        [value]="movies.upcoming"
+        [numVisible]="7"
+        [numScroll]="7"
+        [circular]="true"
+        [showIndicators]="false"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template pTemplate="item" let-movie>
+          <app-movie-card [movie]="movie"></app-movie-card>
+        </ng-template>
+      </p-carousel>
+    </section>
   </section>
 </main>

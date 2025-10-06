@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
-import { Movie } from '../../models/movie.model';
 import { environment } from '../../environments/environment';
 import { CarouselResponsiveOptions } from 'primeng/carousel';
+import { catchError, combineLatest, map, of } from 'rxjs';
+import { GetMoviesResponse } from '../../models/get-movies-response.model';
 
 @Component({
   selector: 'app-movies',
@@ -12,9 +13,21 @@ import { CarouselResponsiveOptions } from 'primeng/carousel';
 export class MoviesComponent implements OnInit {
   public environment = environment;
 
-  public popularMovies: Movie[] = [];
-  public topRatedMovies: Movie[] = [];
-  public upcomingMovies: Movie[] = [];
+  movies$ = combineLatest({
+    popular: this.movieService
+      .getPopularMovies()
+      .pipe(map((r: GetMoviesResponse) => r.results)),
+    topRated: this.movieService
+      .getTopRatedMovies()
+      .pipe(map((r: GetMoviesResponse) => r.results)),
+    upcoming: this.movieService
+      .getUpcomingMovies()
+      .pipe(map((r: GetMoviesResponse) => r.results)),
+  }).pipe(
+    catchError(() =>
+      of({ popular: [], topRated: [], upcoming: [], error: true })
+    )
+  );
 
   public responsiveOptions: CarouselResponsiveOptions[] = [
     { breakpoint: '1024px', numVisible: 5, numScroll: 5 },
@@ -24,15 +37,5 @@ export class MoviesComponent implements OnInit {
 
   constructor(private movieService: MovieService) {}
 
-  ngOnInit(): void {
-    this.movieService
-      .getPopularMovies()
-      .subscribe((res) => (this.popularMovies = res.results));
-    this.movieService
-      .getTopRatedMovies()
-      .subscribe((res) => (this.topRatedMovies = res.results));
-    this.movieService
-      .getUpcomingMovies()
-      .subscribe((res) => (this.upcomingMovies = res.results));
-  }
+  ngOnInit(): void {}
 }
