@@ -1,1 +1,58 @@
-<p>movies works!</p>
+<main>
+  <section class="hero">
+    <h1 class="hero__title">The Movie Website</h1>
+    <h4 class="hero__subtitle">Your personal movie diary.</h4>
+    <div class="hero__search-bar">
+      <input type="search" placeholder="Search for a specific movie..." />
+      <button>Search</button>
+    </div>
+    <!-- <div class="hero__browse">
+      <span>Browse By:</span>
+    </div> -->
+  </section>
+  <section class="movie-list" *ngIf="popularMovies">
+    <h2 class="movie-list__title">Popular</h2>
+    <p-carousel
+      [value]="popularMovies"
+      [numVisible]="7"
+      [numScroll]="7"
+      [circular]="true"
+      [showIndicators]="false"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template pTemplate="item" let-movie>
+        <app-movie-card [movie]="movie"></app-movie-card>
+      </ng-template>
+    </p-carousel>
+  </section>
+  <section class="movie-list" *ngIf="topRatedMovies">
+    <h2 class="movie-list__title">Top Rated</h2>
+    <p-carousel
+      [value]="topRatedMovies"
+      [numVisible]="7"
+      [numScroll]="7"
+      [circular]="true"
+      [showIndicators]="false"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template pTemplate="item" let-movie>
+        <app-movie-card [movie]="movie"></app-movie-card>
+      </ng-template>
+    </p-carousel>
+  </section>
+  <section class="movie-list" *ngIf="upcomingMovies">
+    <h2 class="movie-list__title">Upcoming</h2>
+    <p-carousel
+      [value]="upcomingMovies"
+      [numVisible]="7"
+      [numScroll]="7"
+      [circular]="true"
+      [showIndicators]="false"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template pTemplate="item" let-movie>
+        <app-movie-card [movie]="movie"></app-movie-card>
+      </ng-template>
+    </p-carousel>
+  </section>
+</main>

@@ -1,0 +1,31 @@
+.movie-card {
+  text-align: center;
+  padding: 0 5px;
+
+  img {
+    aspect-ratio: 2/3;
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  &__ratings {
+    display: flex;
+    justify-content: space-around;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+
+  &__icon {
+    &--fire {
+      color: #ff9933;
+    }
+    &--star {
+      color: #e0c010;
+    }
+  }
+}

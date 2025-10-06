@@ -1,0 +1,17 @@
+<div class="movie-card" *ngIf="movie">
+  <img
+    [src]="environment.tmdbImageBaseUrl + movie.poster_path"
+    alt="{{ movie.title }}"
+    title="{{ movie.title }}"
+  />
+  <div class="movie-card__ratings">
+    <div title="Vote Count">
+      <mat-icon class="movie-card__icon--fire">local_fire_department</mat-icon>
+      <span>{{ movie.vote_count }}</span>
+    </div>
+    <div title="Vote Average">
+      <mat-icon class="movie-card__icon--star">star</mat-icon>
+      <span>{{ movie.vote_average | number : "1.1-1" }}</span>
+    </div>
+  </div>
+</div>
