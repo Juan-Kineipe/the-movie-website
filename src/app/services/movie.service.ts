@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { GetMoviesResponse } from '../models/get-movies-response.model';
 import { Observable } from 'rxjs';
@@ -33,6 +33,16 @@ export class MovieService {
   getUpcomingMovies(): Observable<GetMoviesResponse> {
     return this.http.get<GetMoviesResponse>(
       `${environment.tmdbBaseUrl}/movie/upcoming?api_key=${environment.tmdbApiKey}&language=en-US`
+    );
+  }
+
+  searchMovie(query: string): Observable<GetMoviesResponse> {
+    const options = query
+      ? { params: new HttpParams().set('query', query) }
+      : {};
+    return this.http.get<GetMoviesResponse>(
+      `${environment.tmdbBaseUrl}/search/movie?api_key=${environment.tmdbApiKey}&language=en-US`,
+      options
     );
   }
 }

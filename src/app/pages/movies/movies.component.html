@@ -2,10 +2,27 @@
   <section class="hero">
     <h1 class="hero__title">The Movie Website</h1>
     <h4 class="hero__subtitle">Your personal movie diary.</h4>
-    <div class="hero__search-bar">
-      <input type="search" placeholder="Search for a specific movie..." />
-      <button>Search</button>
-    </div>
+    <mat-form-field class="hero__search-bar" appearance="fill">
+      <input
+        type="text"
+        matInput
+        placeholder="Search for a movie..."
+        [formControl]="searchControl"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayMovieTitle"
+        (optionSelected)="openMovieDetails($event)"
+      >
+        <mat-option
+          *ngFor="let movie of searchResults$ | async"
+          [value]="movie"
+        >
+          {{ movie.title }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
     <!-- <div class="hero__browse">
       <span>Browse By:</span>
     </div> -->

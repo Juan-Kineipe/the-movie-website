@@ -1,9 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MovieService } from '../../services/movie.service';
 import { environment } from '../../environments/environment';
 import { CarouselResponsiveOptions } from 'primeng/carousel';
-import { catchError, combineLatest, map, of } from 'rxjs';
+import {
+  catchError,
+  combineLatest,
+  debounceTime,
+  map,
+  of,
+  switchMap,
+} from 'rxjs';
 import { GetMoviesResponse } from '../../models/get-movies-response.model';
+import { Movie } from '../../models/movie.model';
 
 @Component({
   selector: 'app-movies',
@@ -13,7 +24,17 @@ import { GetMoviesResponse } from '../../models/get-movies-response.model';
 export class MoviesComponent implements OnInit {
   public environment = environment;
 
-  movies$ = combineLatest({
+  public searchControl = new FormControl('', { nonNullable: true });
+  public searchResults$ = this.searchControl.valueChanges.pipe(
+    debounceTime(500),
+    switchMap((query) =>
+      this.movieService
+        .searchMovie(query)
+        .pipe(map((res: GetMoviesResponse) => res.results))
+    )
+  );
+
+  public movies$ = combineLatest({
     popular: this.movieService
       .getPopularMovies()
       .pipe(map((r: GetMoviesResponse) => r.results)),
@@ -35,7 +56,18 @@ export class MoviesComponent implements OnInit {
     { breakpoint: '480px', numVisible: 1, numScroll: 1 },
   ];
 
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService, private router: Router) {}
 
   ngOnInit(): void {}
+
+  openMovieDetails(event: MatAutocompleteSelectedEvent) {
+    const movie: Movie = event.option.value;
+    if (movie?.id) {
+      this.router.navigate(['/movie-details', movie.id]);
+    }
+  }
+
+  displayMovieTitle(movie: Movie): string {
+    return movie?.title ?? '';
+  }
 }

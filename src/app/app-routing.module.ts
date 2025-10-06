@@ -20,11 +20,15 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'movie-details',
+    path: 'movie-details/:id',
     loadChildren: () =>
       import('./pages/movie-details/movie-details.module').then(
         (m) => m.MovieDetailsModule
       ),
+  },
+  {
+    path: '**',
+    redirectTo: 'movies',
   },
 ];
 
