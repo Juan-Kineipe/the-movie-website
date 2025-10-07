@@ -13,5 +13,12 @@
       <mat-icon class="movie-card__icon--star">star</mat-icon>
       <span>{{ movie.vote_average | number : "1.1-1" }}</span>
     </div>
+    <mat-icon
+      title="Favorite"
+      class="movie-card__icon--favorite"
+      (click)="toggleFavorite()"
+    >
+      {{ (isFavorite$ | async) ? "favorite" : "favorite_border" }}
+    </mat-icon>
   </div>
 </div>

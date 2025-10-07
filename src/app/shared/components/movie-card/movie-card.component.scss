@@ -22,10 +22,14 @@
 
   &__icon {
     &--fire {
-      color: #ff9933;
+      color: #cc5500;
     }
     &--star {
       color: #e0c010;
+    }
+    &--favorite {
+      color: #d2042d;
+      cursor: pointer;
     }
   }
 }
