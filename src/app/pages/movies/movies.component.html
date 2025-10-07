@@ -13,7 +13,7 @@
       <mat-autocomplete
         #auto="matAutocomplete"
         [displayWith]="displayMovieTitle"
-        (optionSelected)="openMovieDetails($event)"
+        (optionSelected)="openMovieDetails($event.option.value)"
       >
         <mat-option
           *ngFor="let movie of searchResults$ | async"
@@ -23,9 +23,6 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <!-- <div class="hero__browse">
-      <span>Browse By:</span>
-    </div> -->
   </section>
   <section class="movie-list-container" *ngIf="movies$ | async as movies">
     <section class="movie-list" *ngIf="movies.popular.length">
@@ -39,7 +36,10 @@
         [responsiveOptions]="responsiveOptions"
       >
         <ng-template pTemplate="item" let-movie>
-          <app-movie-card [movie]="movie"></app-movie-card>
+          <app-movie-card
+            [movie]="movie"
+            (openMovieDetails)="openMovieDetails($event)"
+          ></app-movie-card>
         </ng-template>
       </p-carousel>
     </section>
@@ -54,7 +54,10 @@
         [responsiveOptions]="responsiveOptions"
       >
         <ng-template pTemplate="item" let-movie>
-          <app-movie-card [movie]="movie"></app-movie-card>
+          <app-movie-card
+            [movie]="movie"
+            (openMovieDetails)="openMovieDetails($event)"
+          ></app-movie-card>
         </ng-template>
       </p-carousel>
     </section>
@@ -69,7 +72,10 @@
         [responsiveOptions]="responsiveOptions"
       >
         <ng-template pTemplate="item" let-movie>
-          <app-movie-card [movie]="movie"></app-movie-card>
+          <app-movie-card
+            [movie]="movie"
+            (openMovieDetails)="openMovieDetails($event)"
+          ></app-movie-card>
         </ng-template>
       </p-carousel>
     </section>

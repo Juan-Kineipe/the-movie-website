@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { GetMoviesResponse } from '../models/get-movies-response.model';
 import { Observable } from 'rxjs';
+import { GetMoviesResponse } from '../models/get-movies-response.model';
+import { MovieDetails } from '../models/movie-details.model';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +44,12 @@ export class MovieService {
     return this.http.get<GetMoviesResponse>(
       `${environment.tmdbBaseUrl}/search/movie?api_key=${environment.tmdbApiKey}&language=en-US`,
       options
+    );
+  }
+
+  getMovieDetails(id: string) {
+    return this.http.get<MovieDetails>(
+      `${environment.tmdbBaseUrl}/movie/${id}?api_key=${environment.tmdbApiKey}&language=en-US`
     );
   }
 }

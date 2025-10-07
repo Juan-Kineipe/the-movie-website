@@ -30,7 +30,11 @@ export class MoviesComponent implements OnInit {
     switchMap((query) =>
       this.movieService
         .searchMovie(query)
-        .pipe(map((res: GetMoviesResponse) => res.results))
+        .pipe(
+          map((res: GetMoviesResponse) =>
+            res.results.filter((movie) => !!movie.poster_path)
+          )
+        )
     )
   );
 
@@ -60,8 +64,7 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openMovieDetails(event: MatAutocompleteSelectedEvent) {
-    const movie: Movie = event.option.value;
+  openMovieDetails(movie: Movie) {
     if (movie?.id) {
       this.router.navigate(['/movie-details', movie.id]);
     }

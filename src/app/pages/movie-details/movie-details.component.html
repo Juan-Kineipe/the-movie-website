@@ -1,1 +1,87 @@
-<h1>{{ movieId }}</h1>
+<main>
+  <mat-icon routerLink="/" class="btn-back"> arrow_back</mat-icon>
+  <section *ngIf="movieDetails$ | async as movieDetails" class="movie-details">
+    <div class="movie-details__backdrop">
+      <img
+        [src]="environment.tmdbImageBaseUrl + movieDetails.backdrop_path"
+        alt="{{ movieDetails.title }}"
+        (load)="onBackdropImageLoaded()"
+        [ngClass]="{ loaded: backdropImageLoaded }"
+      />
+    </div>
+    <div class="movie-details__main">
+      <div class="movie-details__card" *ngIf="movie$ | async as movie">
+        <app-movie-card [movie]="movie"></app-movie-card>
+      </div>
+      <div class="movie-details__info">
+        <h1>{{ movieDetails.title }}</h1>
+        <p>{{ movieDetails.overview }}</p>
+        <div>
+          <p class="movie-details__label">Genres:</p>
+          <p>
+            <ng-container
+              *ngFor="let genre of movieDetails.genres; let last = last"
+            >
+              {{ genre.name }}<span *ngIf="!last">, </span>
+            </ng-container>
+          </p>
+        </div>
+        <div>
+          <p class="movie-details__label">Spoken Languages:</p>
+          <p>
+            <ng-container
+              *ngFor="
+                let language of movieDetails.spoken_languages;
+                let last = last
+              "
+            >
+              {{ language.english_name }}<span *ngIf="!last">, </span>
+            </ng-container>
+          </p>
+        </div>
+        <div>
+          <p class="movie-details__label">Production Countries:</p>
+          <p>
+            <ng-container
+              *ngFor="
+                let country of movieDetails.production_countries;
+                let last = last
+              "
+            >
+              {{ country.name }}<span *ngIf="!last">, </span>
+            </ng-container>
+          </p>
+        </div>
+        <div>
+          <p class="movie-details__label">Production Companies:</p>
+          <p>
+            <ng-container
+              *ngFor="
+                let company of movieDetails.production_companies;
+                let last = last
+              "
+            >
+              {{ company.name }}<span *ngIf="!last">, </span>
+            </ng-container>
+          </p>
+        </div>
+        <div class="movie-details__budget">
+          <div>
+            <p class="movie-details__label">Budget:</p>
+            <p>{{ movieDetails.budget | currency }}</p>
+          </div>
+          <div>
+            <p class="movie-details__label">Revenue:</p>
+            <p>{{ movieDetails.revenue | currency }}</p>
+          </div>
+        </div>
+        <p class="movie-details__homepage" *ngIf="movieDetails.homepage">
+          Homepage:
+          <a href="{{ movieDetails.homepage }}" target="_blank">
+            {{ movieDetails.homepage }}
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>

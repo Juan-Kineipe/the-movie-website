@@ -3,6 +3,7 @@
     [src]="environment.tmdbImageBaseUrl + movie.poster_path"
     alt="{{ movie.title }}"
     title="{{ movie.title }}"
+    (click)="onClick(movie)"
   />
   <div class="movie-card__ratings">
     <div title="Vote Count">

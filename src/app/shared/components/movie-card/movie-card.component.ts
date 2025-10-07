@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/app.state';
 import { Movie } from '../../../models/movie.model';
@@ -15,6 +15,7 @@ import { isFavorite } from '../../../state/favorites/favorites.selectors';
 export class MovieCardComponent implements OnInit {
   public environment = environment;
   @Input({ required: true }) movie!: Movie;
+  @Output() openMovieDetails: EventEmitter<Movie> = new EventEmitter();
 
   isFavorite$!: Observable<boolean>;
 
@@ -36,5 +37,9 @@ export class MovieCardComponent implements OnInit {
         );
       }
     });
+  }
+
+  onClick(movie: Movie) {
+    this.openMovieDetails.emit(movie);
   }
 }
