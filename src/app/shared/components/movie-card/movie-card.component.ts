@@ -15,6 +15,7 @@ import { isFavorite } from '../../../state/favorites/favorites.selectors';
 export class MovieCardComponent implements OnInit {
   public environment = environment;
   @Input({ required: true }) movie!: Movie;
+  @Input() fromMoviesList = false;
   @Output() openMovieDetails: EventEmitter<Movie> = new EventEmitter();
 
   isFavorite$!: Observable<boolean>;

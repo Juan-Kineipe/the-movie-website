@@ -1,4 +1,8 @@
-<div class="movie-card" *ngIf="movie">
+<div
+  class="movie-card"
+  [ngClass]="{ 'movie-card--from-movies': fromMoviesList }"
+  *ngIf="movie"
+>
   <img
     [src]="environment.tmdbImageBaseUrl + movie.poster_path"
     alt="{{ movie.title }}"

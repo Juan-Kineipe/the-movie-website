@@ -38,6 +38,7 @@
         <ng-template pTemplate="item" let-movie>
           <app-movie-card
             [movie]="movie"
+            [fromMoviesList]="true"
             (openMovieDetails)="openMovieDetails($event)"
           ></app-movie-card>
         </ng-template>
@@ -56,6 +57,7 @@
         <ng-template pTemplate="item" let-movie>
           <app-movie-card
             [movie]="movie"
+            [fromMoviesList]="true"
             (openMovieDetails)="openMovieDetails($event)"
           ></app-movie-card>
         </ng-template>
@@ -74,6 +76,7 @@
         <ng-template pTemplate="item" let-movie>
           <app-movie-card
             [movie]="movie"
+            [fromMoviesList]="true"
             (openMovieDetails)="openMovieDetails($event)"
           ></app-movie-card>
         </ng-template>
