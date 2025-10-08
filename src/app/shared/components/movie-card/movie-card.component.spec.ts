@@ -51,4 +51,13 @@ describe('MovieCardComponent', () => {
     );
     expect(voteCountEl.nativeElement.textContent.trim()).toBe('8.8');
   });
+
+  it('should emit event on card click', () => {
+    spyOn(component.openMovieDetails, 'emit');
+    const img = fixture.debugElement.query(By.css('img'));
+    img.triggerEventHandler('click', null);
+    expect(component.openMovieDetails.emit).toHaveBeenCalledWith(
+      component.movie
+    );
+  });
 });
