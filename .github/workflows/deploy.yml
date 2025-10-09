@@ -26,13 +26,13 @@ jobs:
 
       - name: Create environment file
         run: |
-          mkdir -p src/environments
-          echo "export const environment = {" > src/environments/environment.ts
-          echo "  tmdbBaseUrl: 'https://api.themoviedb.org/3'," >> src/environments/environment.ts
-          echo "  tmdbApiKey: '${{ secrets.TMDB_API_KEY }}'" >> src/environments/environment.ts
-          echo "  tmdbImageBaseUrl: 'https://image.tmdb.org/t/p/original'" >> src/environments/environment.ts
-          echo "};" >> src/environments/environment.ts
-          cat src/environments/environment.ts
+          mkdir -p src/app/environments
+          echo "export const environment = {" > src/app/environments/environment.ts
+          echo "  tmdbBaseUrl: 'https://api.themoviedb.org/3'," >> src/app/environments/environment.ts
+          echo "  tmdbApiKey: '${{ secrets.TMDB_API_KEY }}'" >> src/app/environments/environment.ts
+          echo "  tmdbImageBaseUrl: 'https://image.tmdb.org/t/p/original'" >> src/app/environments/environment.ts
+          echo "};" >> src/app/environments/environment.ts
+          cat src/app/environments/environment.ts
 
       - name: Build Angular app
         run: npm run build -- --base-href "/the-movie-website/"
