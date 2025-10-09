@@ -7,12 +7,17 @@ main {
 
 .hero {
   background: rgba(255, 255, 255, 0.05);
-  padding: 50px 75px;
+  padding: 30px;
   border-radius: 10px;
+
+  @media screen and (min-width: 768px) {
+    padding: 50px 75px;
+  }
 
   &__title {
     font-size: 2.5rem;
     font-weight: bold;
+    line-height: 1;
   }
 }
 
@@ -32,5 +37,7 @@ main {
 }
 
 ::ng-deep .mat-mdc-form-field {
-  width: 300px;
+  @media screen and (min-width: 768px) {
+    width: 300px;
+  }
 }
