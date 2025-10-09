@@ -36,7 +36,8 @@
               "./node_modules/material-icons/iconfont/material-icons.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "baseHref": "/the-movie-website/"
           },
           "configurations": {
             "production": {
@@ -93,6 +94,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
