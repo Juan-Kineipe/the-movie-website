@@ -29,7 +29,7 @@ jobs:
           mkdir -p src/app/environments
           echo "export const environment = {" > src/app/environments/environment.ts
           echo "  tmdbBaseUrl: 'https://api.themoviedb.org/3'," >> src/app/environments/environment.ts
-          echo "  tmdbApiKey: '${{ secrets.TMDB_API_KEY }}'" >> src/app/environments/environment.ts
+          echo "  tmdbApiKey: '${{ secrets.TMDB_API_KEY }}'," >> src/app/environments/environment.ts
           echo "  tmdbImageBaseUrl: 'https://image.tmdb.org/t/p/original'" >> src/app/environments/environment.ts
           echo "};" >> src/app/environments/environment.ts
           cat src/app/environments/environment.ts
